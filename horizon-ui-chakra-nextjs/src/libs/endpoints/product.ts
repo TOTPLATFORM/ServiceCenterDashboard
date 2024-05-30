@@ -18,7 +18,7 @@ export async function getProduct(): Promise<IProductList[]> {
  * @returns a promise resolving to a success message upon successful deletion.
  */
 export async function deleteProduct(id: string): Promise<string> {
-  const data = await fetchApi<any>(`${Url}?id=${id}`, "DELETE");
+  const data = await fetchApi<any>(`${Url}/${id}`, "DELETE");
   return data.successMessage;
 }
 /**
