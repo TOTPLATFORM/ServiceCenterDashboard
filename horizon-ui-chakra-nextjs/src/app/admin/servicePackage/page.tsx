@@ -26,9 +26,7 @@ const page = () => {
       if (data) {
         setServicePackages((prev) => ({
           headers: [
-            { title: 'ID', field: 'id' },
             { title: 'Package Name', field: 'packageName' },
-            { title: 'Description', field: 'packageDescription' },
             { title: 'Price', field: 'packagePrice' },
           ],
           data: data,
@@ -43,16 +41,16 @@ const page = () => {
     loadData();
   }, [loadData]);
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: number) => {
     await DeleteServicePackage(id);
     loadData();
     router.push("/admin/servicePackage");
   };
-  const viewServicePackageDetails = async (id: string) => {
+  const viewServicePackageDetails = async (id: number) => {
     router.push(`/admin/servicePackage/${id}`);
   };
 
-  const handleOnEdit = async (id: string) => {
+  const handleOnEdit = async (id: number) => {
     await GetByIdServicePackage(id)
     router.push(`/admin/servicePackage/update/${id}`);
   };
@@ -71,7 +69,7 @@ const page = () => {
           fontWeight="700"
           lineHeight="100%"
         >
-          ServicePackages
+          Service Packages
         </Text>
         <Menu />
       </Flex>
@@ -94,7 +92,7 @@ const page = () => {
                 borderRadius: '5px' /* Rounded corners */,
               }}
             >
-              Add new ServicePackage{' '}
+              Add new Service Package{' '}
               <span style={{ fontSize: '20px', fontWeight: 'bold' }}>+</span>
             </button>
           </div>

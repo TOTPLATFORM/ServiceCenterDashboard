@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { IServicePackageList } from 'types/ServicePackage';
 import { GetByIdServicePackage } from 'libs/endpoints/servicePackage';
 
-const ServicePackageDetails = ({ id }: { id: string }) => {
+const ServicePackageDetails = ({ id }: { id: number }) => {
   const [servicePackage, setServicePackage] = useState<IServicePackageList>();
 
   const router = useRouter();

@@ -10,14 +10,14 @@ import { IServicePackage } from 'types/ServicePackage';
 import { GetService } from 'libs/endpoints/service';
 
 const ServicePackageAddForm = () => {
-  const [Category, setCategory] = useState([]);
+  const [service, setService] = useState([]);
   const router = useRouter();
 
   
 
   const fetchService = async () => {
-    let Category = await GetService();
-    setCategory(Category);
+    let services = await GetService();
+    setService(services);
   }
 
   
@@ -40,9 +40,6 @@ const ServicePackageAddForm = () => {
       { label: 'Package Description', name: 'packageDescription', inputType: 'text', placeholder: 'Package Description' },
       { label: 'Package Price', name: 'packagePrice', inputType: 'number', placeholder: 'Package Price' },
     ],
-    dropDownLists:[
-       {label: "Service", name: "serviceId", placeholder: "Service", value: "id", displayName: "serviceName", data: Category},
-      ],
     heading: 'Add ServicePackage',
     onSubmit: handleSubmit,
   };
@@ -52,7 +49,6 @@ const ServicePackageAddForm = () => {
       title={fields.title}
       disabled={fields.disabled}
       fields={fields.fields}
-      dropDownLists={fields.dropDownLists}
       heading={fields.heading}
       onSubmit={handleSubmit}
     ></CompactForm>
