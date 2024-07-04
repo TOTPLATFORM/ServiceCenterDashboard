@@ -30,8 +30,9 @@ const ProductCategoryDetails = ({ id }: { id: number }) => {
     fetchProductBrand();
    }, [])
 
-  const handleSubmit = async (formData: IProductCategoryList) => {
-    AssingProductCategoryToProductBrand(id, formData.id);
+  const handleSubmit = async (formData: any) => {
+    let selectedBrandId =  formData.brandName;
+    await AssingProductCategoryToProductBrand(selectedBrandId, id);
     router.push('/admin/product-category');
   };
 

@@ -50,3 +50,4 @@ export async function addServiceCategory(BodyData: IServiceCategory): Promise<st
   const data = await fetchApi<any>(Url, "POST", JSON.stringify(BodyData));
   return data.successMessage;
 }
+

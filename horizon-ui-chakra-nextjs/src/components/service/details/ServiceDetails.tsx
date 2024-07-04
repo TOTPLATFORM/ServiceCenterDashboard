@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { IServiceList } from 'types/Service';
 import { GetByIdService } from 'libs/endpoints/service';
 
-const ServiceDetails = ({ id }: { id: string }) => {
+const ServiceDetails = ({ id }: { id: number }) => {
   const [service, setService] = useState<IServiceList>();
 
   const router = useRouter();

@@ -53,9 +53,7 @@ const ServiceAddForm = () => {
       { label: 'Avaliability', name: 'avaliable', inputType: 'text', placeholder: 'Avaliability' },
     ],
     dropDownLists:[
-       {label: "Employee", name: "employeeId", placeholder: "Employee", value: "id", displayName: "employeeFirstName", data: Employee},
        {label: "Service Category", name: "serviceCategoryId", placeholder: "Category", value: "id", displayName: "serviceCategoryName", data: Category},
-       {label: "Service Package", name: "servicePcakagesIds", placeholder: "Package", value: "id", displayName: "packageName", data: Package},
       ],
     heading: 'Add Service',
     onSubmit: handleSubmit,

@@ -10,18 +10,13 @@ import { GetByIdService, UpdateService } from 'libs/endpoints/service';
 import { getEmployee } from 'libs/endpoints/employee';
 import { getServiceCategory } from 'libs/endpoints/service-category';
 
-const ServiceUpdateForm = ({ id }: { id: string }) => {
+const ServiceUpdateForm = ({ id }: { id: number }) => {
   const [Service, setService] = useState<IServiceList>();
-  const [Employee, setEmployee] = useState([]);
   const [Category, setCategory] = useState([]);
   const [Package, setPackage] = useState([]);
   const router = useRouter();
 
-  const fetchEmployee = async () => {
-    let employees = await getEmployee();
-    setEmployee(employees);
-  }
-
+ 
   const fetchCategory = async () => {
     let Category = await getServiceCategory();
     setCategory(Category);
@@ -41,7 +36,6 @@ const ServiceUpdateForm = ({ id }: { id: string }) => {
   
 
   useEffect(() => {
-    fetchEmployee();
     fetchCategory();
     fetchPackages();
     fetchService();
@@ -62,9 +56,7 @@ const ServiceUpdateForm = ({ id }: { id: string }) => {
       { label: 'Avaliability', name: 'avaliable', inputType: 'text', placeholder: 'Avaliability' },
     ],
     dropDownLists:[
-      {label: "Employee", name: "employeeId", placeholder: "Employee", value: "id", displayName: "employeeFirstName", data: Employee},
       {label: "Service Category", name: "serviceCategoryId", placeholder: "Category", value: "id", displayName: "serviceCategoryName", data: Category},
-      {label: "Service Package", name: "servicePcakagesIds", placeholder: "Package", value: "id", displayName: "packageName", data: Package},
       ],
     heading: 'Update Service',
     data: Service,

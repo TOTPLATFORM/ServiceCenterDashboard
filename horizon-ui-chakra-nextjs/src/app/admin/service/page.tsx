@@ -26,13 +26,11 @@ const page = () => {
       if (data) {
         setServices((prev) => ({
           headers: [
-            { title: 'ID', field: 'id' },
             { title: 'Service Name', field: 'serviceName' },
             { title: 'Description', field: 'serviceDescription' },
             { title: 'Price', field: 'servicePrice' },
             { title: 'Avaliable', field: 'avaliable' },
             { title: 'Category Name', field: 'serviceCategoryName' },
-            { title: 'Employee Name', field: 'employeeName' },
           ],
           data: data,
         }));
@@ -46,16 +44,16 @@ const page = () => {
     loadData();
   }, [loadData]);
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: number) => {
     await DeleteService(id);
     loadData();
     router.push("/admin/service");
   };
-  const viewServiceDetails = async (id: string) => {
+  const viewServiceDetails = async (id: number) => {
     router.push(`/admin/service/${id}`);
   };
 
-  const handleOnEdit = async (id: string) => {
+  const handleOnEdit = async (id: number) => {
     await GetByIdService(id)
     router.push(`/admin/service/update/${id}`);
   };

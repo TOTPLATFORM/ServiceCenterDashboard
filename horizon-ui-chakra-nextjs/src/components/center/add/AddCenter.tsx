@@ -28,6 +28,7 @@ const AddCenter = () => {
             {label: "Opening Hours", name: "openingHours", inputType: "number", placeholder: "Opening Hours"},
             {label: "Specialty", name: "specialty", inputType: "text", placeholder: "Specialty"}
         ],
+        data:Center,
         heading: "Create Center",
         onSubmit: handleSubmit,
        
@@ -45,7 +46,6 @@ const AddCenter = () => {
         fields={fields.fields} 
         heading={fields.heading}
         data={fields.data}
-        dropDownLists={fields.dropDownLists}
         onSubmit={handleSubmit}>
         </CompactForm>
       
