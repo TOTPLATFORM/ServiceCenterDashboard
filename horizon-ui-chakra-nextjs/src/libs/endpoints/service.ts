@@ -64,6 +64,6 @@ export async function DeleteService(id: number): Promise<string> {
  * @returns a promise resolving to a success message upon successful addition.
  */
 export async function AssingServiceToServicePackage(serviceId: number, servicePackageId: number): Promise<string> {
-  const data = await fetchApi<any>(`${Url}/assign?serviceId=${serviceId}&servicePackageId=${servicePackageId}`, "Get");
+  const data = await fetchApi<any>(`${Url}/assign?serviceId=${serviceId}&servicePackageId=${servicePackageId}`, "GET");
   return data.successMessage;
 }
