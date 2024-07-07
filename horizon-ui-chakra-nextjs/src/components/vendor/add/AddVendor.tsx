@@ -4,9 +4,10 @@ import CompactForm, { IFieldsProps } from "components/common/compact-form/Compac
 import { useRouter } from 'next/navigation';
 import { addVendor } from "libs/endpoints/vendor";
 import { getCenter } from "libs/endpoints/center";
+import { ICenterList } from "types/Center";
 
 const AddVendor = () => {
-    const [center, setCenter] = useState([]);
+    const [center, setCenter] = useState<ICenterList>();
     const router = useRouter();
 
     const handleSubmit = async (formData: any) => {

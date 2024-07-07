@@ -11,6 +11,12 @@ export interface IColumnsProps {
   children?:ReactNode;
   background?:string
 }
+
+
+const getNestedValue = (obj: any, path: string) => {
+  return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+};
+
 const CompactTable = ({
   headers,
   data,
@@ -44,7 +50,7 @@ const CompactTable = ({
                   {headers.map((row, colIndex) => (
                     <Td onClick={() => {
                       onClick && onClick(item.id);
-                    }} key={colIndex}>{item[row.field] ?? 'N/A'}</Td>
+                    }} key={colIndex}>{getNestedValue(item,row.field) ?? 'N/A'}</Td>
                   ))}
                     {(onUpdate || onDelete) && (
                   <Td>

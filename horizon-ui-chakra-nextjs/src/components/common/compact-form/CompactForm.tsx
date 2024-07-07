@@ -1,7 +1,6 @@
 "use client";
 
 import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, Select, useColorModeValue } from "@chakra-ui/react"
-import { title } from "process";
 import React from "react";
 import { ChangeEvent, useEffect, useState } from "react";
 
@@ -20,25 +19,37 @@ export interface IFieldsProps {
     const textColor = useColorModeValue('navy.700', 'white');
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setFormData((prevState: any) => ({
-          ...prevState,
-          [name]: value
-        }));
+      const { name, value } = e.target;
+      const keys = name.split('.');
+      setFormData((prevState: any) => {
+        const updatedFormData = { ...prevState };
+        let nestedData = updatedFormData;
+  
+        for (let i = 0; i < keys.length - 1; i++) {
+          if (!nestedData[keys[i]]) {
+            nestedData[keys[i]] = {};
+          }
+          nestedData = nestedData[keys[i]];
+        }
+  
+        nestedData[keys[keys.length - 1]] = value;
+        return updatedFormData;
+      });
     };
-
+  
     useEffect(() => {
-      if(data) {
-          setFormData(data);
-          console.log(formData);
+      if (data) {
+        setFormData(data);
       }
     }, [data]);
-
-
+  
     const handleSubmit = async () => {
-        onSubmit(formData);
-    }
-
+      onSubmit(formData);
+    };
+  
+    const getNestedValue = (obj: any, path: string) => {
+      return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+    };
     return (
         <Flex
         maxW={{ base: '100%', md: 'max-content' }}
@@ -90,7 +101,7 @@ export interface IFieldsProps {
                                     mb="24px"
                                     size="lg"
                                     variant="auth"
-                                    value={formData[field.name] || ''}
+                                    value={getNestedValue(formData,field.name) || ''}
                                 >
                                     {field.options?.map(option => (
                                         <option key={option.value} value={option.value}>{option.label}</option>
@@ -109,7 +120,7 @@ export interface IFieldsProps {
                                 mb="24px"
                                 fontWeight="500"
                                 size="lg"
-                                value={formData[field.name] || ''}
+                                value={getNestedValue(formData,field.name) || ''}
                                 onChange={handleChange}
                                 isDisabled={disabled}
                             />
@@ -137,7 +148,11 @@ export interface IFieldsProps {
                             variant="auth"
                         >
                             {dropDownList.data.map(option => (
-                                <option key={option[dropDownList.value]} value={option[dropDownList.value]}>{option[dropDownList.displayName]}</option>
+                                <option 
+                                key={option[dropDownList.value]} 
+                                value={option[dropDownList.value]}
+                                >
+                                {option[dropDownList.displayName]}</option>
                             ))}
                         </Select>
                     </React.Fragment>
