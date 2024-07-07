@@ -3,44 +3,56 @@ import React, {useState, useEffect } from "react";
 import CompactForm, { IFieldsProps } from "components/common/compact-form/CompactForm";
 import { useRouter } from 'next/navigation';
 import { addContact, getContact } from "libs/endpoints/contact";
-import { getCenter } from "libs/endpoints/center";
-import { IContact } from "types/Contact";
+import { City, Country, Gender, IContact } from "types/Contact";
+import { enumToArray } from "utils/enumUtils";
 
 const AddContact = () => {
     const router = useRouter();
     const handleSubmit = async (formData: any) => {
 
         let contact: IContact = {
-            contactFirstName: formData.contactFirstName,
-            contactLastName: formData.contactLastName,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
             gender: formData.gender,
-            contactEmail: formData.contactEmail,
+            email: formData.email,
             address: {
                 city: formData.city,
                 country: formData.country,
                 postalCode: formData.postalCode
-            }
+            },
+            password : formData.password,
+            phoneNumber : formData.phoneNumber,
+            userName: formData.userName,
+            dateOfBirth : formData.dateOfBirth
         }
 
         await addContact(contact);
         router.push("/admin/contact");
     }
 
+    const cityOptions = enumToArray(City);
+    const countryOptions = enumToArray(Country);
+    const genderOptions = enumToArray(Gender);
+
     let fields: IFieldsProps = {
         title: "Add Contact",
         disabled: false,
         fields: [
-            {label: "First Name", name: "contactFirstName", inputType: "text", placeholder: "First Name"},
-            {label: "Last Name", name: "contactLastName", inputType: "text", placeholder: "Last Name"},
-            {label: "Email Address", name: "contactEmail", inputType: "text", placeholder: "Email Address"},
-            {label: "Gender", name: "gender", inputType: "text", placeholder: "Gender"},
-            {label: "City", name: "city", inputType: "text", placeholder: "City"},
-            {label: "country", name: "country", inputType: "text", placeholder: "country"},
+            {label: "First Name", name: "firstName", inputType: "text", placeholder: "First Name"},
+            {label: "Last Name", name: "lastName", inputType: "text", placeholder: "Last Name"},
+            {label: "Email Address", name: "email", inputType: "email", placeholder: "Email Address"},
+            {label: "Phone Number", name: "phoneNumber", inputType: "text", placeholder: "Phone Number"},
+            {label: "DateOfBirth", name: "dateOfBirth", inputType: "date", placeholder: "DateOfBirth"},
+            {label: "Password", name: "password", inputType: "text", placeholder: "Password"},
+            {label: "UserName", name: "userName", inputType: "text", placeholder: "UserName"},
+            {label: "Gender", name: "gender", inputType: "select", placeholder: "Select Gender" , options: genderOptions},
+            {label: "City", name: "city", inputType: "select",  placeholder: "Select City", options: cityOptions },
+            {label: "country", name: "country", inputType: "select", placeholder: "Select Country" , options:countryOptions},
             {label: "Postal Code", name: "postalCode", inputType: "text", placeholder: "Postal Code"}
         ],
+
         heading: "Create Contact",
         onSubmit: handleSubmit,
-       
       }
 
       useEffect(() => {
@@ -53,7 +65,6 @@ const AddContact = () => {
         fields={fields.fields} 
         heading={fields.heading}
         data={fields.data}
-        dropDownLists={fields.dropDownLists}
         onSubmit={handleSubmit}>
         </CompactForm>
       

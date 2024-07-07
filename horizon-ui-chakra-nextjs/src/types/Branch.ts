@@ -15,7 +15,6 @@ export interface IBranch
     branchPhoneNumber: string,
     emailAddress: string,
     address: Address,
-    centerId: number
 }
 export interface Address
 {

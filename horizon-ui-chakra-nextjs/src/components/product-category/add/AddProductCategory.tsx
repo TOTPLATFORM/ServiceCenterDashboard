@@ -7,6 +7,9 @@ import { addProductCategory, getProductCategory } from "libs/endpoints/product-c
 const AddProductCategory = () => {
     const [ProductCategory, setProductCategory] = useState([]);
     const router = useRouter();
+
+
+    
     const handleSubmit = async (formData: any) => {
         await addProductCategory(formData);
         router.push("/admin/product-category");
@@ -21,8 +24,7 @@ const AddProductCategory = () => {
         title: "Add ProductCategory",
         disabled: false,
         fields: [
-            {label: "Name", name: "categoryName", inputType: "text", placeholder: "Name"},
-            {label: "Reference Number", name: "referenceNumber", inputType: "number", placeholder: "Reference Number"}
+            {label: "Name", name: "categoryName", inputType: "text", placeholder: "Name"}
         ],
         heading: "Create ProductCategory",
         onSubmit: handleSubmit,
@@ -30,8 +32,7 @@ const AddProductCategory = () => {
       }
 
       useEffect(() => {
-        fetchProductCategorys();
-      
+      fetchProductCategorys();
     },[]);
 
       return (

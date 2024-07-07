@@ -7,7 +7,7 @@ export interface ICampaginList
     endDate: Date,
     budget: number,
     goals: string,
-    status: string
+    status: CampaginStatus
 }
 export interface ICampagin
 { 
@@ -17,5 +17,13 @@ export interface ICampagin
     endDate: Date,
     budget: number,
     goals: string,
-    status: string
+    status: CampaginStatus
 }
+
+export enum CampaginStatus {
+   Active,
+   Planned,
+   Completed,
+   OnHold, 
+   Cancelled
+} 

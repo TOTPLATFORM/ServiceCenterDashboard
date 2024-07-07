@@ -9,7 +9,7 @@ import {  ICampaginList } from 'types/Campagin';
 import { useRouter } from 'next/navigation';
 import { getByIdCampagin } from 'libs/endpoints/campagin';
 
-const CampaginDetails = ({ id }: { id: string }) => {
+const CampaginDetails = ({ id }: { id: number }) => {
   const [Campagin, setCampagin] = useState<ICampaginList>();
  
   const router = useRouter();
@@ -24,7 +24,7 @@ const CampaginDetails = ({ id }: { id: string }) => {
    }, [])
 
   const handleSubmit = async (formData: ICampaginList) => {
-    router.push('/admin/developer');
+    router.push('/admin/campagin');
   };
 
   let fields: IFieldsProps = {

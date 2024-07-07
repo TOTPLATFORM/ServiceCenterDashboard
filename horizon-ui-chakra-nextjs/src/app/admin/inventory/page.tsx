@@ -19,8 +19,6 @@ const page = () => {
   }>();
   const textColor = useColorModeValue('secondaryGray.900', 'white');
   const router = useRouter();
-  const [selectedId, setSelectedId] = useState<string | number>(null);
-
 
   const loadData = useCallback(() => {
     getInventory().then((data: any) => {

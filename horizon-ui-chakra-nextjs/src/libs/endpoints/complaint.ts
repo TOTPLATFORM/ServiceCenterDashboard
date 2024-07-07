@@ -52,6 +52,6 @@ export async function GetByIdComplaint(id: string): Promise<IComplaintList> {
  * @returns A promise resolving to a success message upon successful deletion.
  */
 export async function DeleteComplaint(id: string): Promise<string> {
-  const data = await fetchApi<any>(`${Url}?id=${id}`, "DELETE");
+  const data = await fetchApi<any>(`${Url}/${id}`, "DELETE");
   return data.successMessage;
 }

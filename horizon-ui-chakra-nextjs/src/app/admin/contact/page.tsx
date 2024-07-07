@@ -1,12 +1,13 @@
 'use client';
 import { useEffect, useState, useCallback } from 'react';
-import { Flex, Box, Text, useColorModeValue } from '@chakra-ui/react';
+import { Flex, Box, Text, useColorModeValue, Button, background } from '@chakra-ui/react';
 import Card from 'components/card/Card';
 import Menu from 'components/menu/MainMenu';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import CompactTable from 'components/common/compact-table/CompactTable';
-import { deleteContact, getByIdContact, getContact } from 'libs/endpoints/contact';
+import {  getByIdContact, getContact, updateContact } from 'libs/endpoints/contact';
+import { Status } from 'types/Contact';
 
 const Page = () => {
   const [Contacts, setContacts] = useState<{
@@ -16,34 +17,26 @@ const Page = () => {
   const textColor = useColorModeValue('secondaryGray.900', 'white');
   const router = useRouter();
 
-  // const viewContactDetails = async (id: string) => {
-  //   router.push(`/admin/contact/${id}`);
-  // };
-
   const handleOnEdit = async (id: string) => {
     await getByIdContact(id);
     router.push(`/admin/contact/update/${id}`);
   };
 
-  // const handleDelete = async (id: string) => {
-  //   await deleteContact(id);
-  //   loadData();
-  //   router.push(`/admin/contact`);
-  // };
+  
 
   const loadData = useCallback(() => {
     getContact().then((data: any) => {
       if (data) {
         setContacts((prev) => ({
           headers: [
-            {title: 'id', field: 'id' },
-            {title: "First Name", field: "firstName"},
-            {title: "Last Name", field: "lastName"},
+            {title: "First Name", field: "contactFirstName"},
+            {title: "Last Name", field: "contactLastName"},
+            {title: "Email Address", field: "contactEmail"},  
             {title: "Status", field: "status"},
             {title: "City", field: "city"},
             {title: "Country", field: "country"},  
             {title: "Postal Code", field: "postalCode"},
-            {title: "Email Address", field: "email"},        
+                 
           ],
           data: data,
         }));

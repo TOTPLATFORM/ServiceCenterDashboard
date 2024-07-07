@@ -26,7 +26,6 @@ const page = () => {
       if (data) {
         setDepartments((prev) => ({
           headers: [
-            { title: 'ID', field: 'id' },
             { title: 'Department Name', field: 'departmentName' }
           ],
           data: data,
@@ -41,16 +40,16 @@ const page = () => {
     loadData();
   }, [loadData]);
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: number) => {
     await DeleteDepartment(id);
     loadData();
     router.push("/admin/department");
   };
-  const viewDepartmentDetails = async (id: string) => {
+  const viewDepartmentDetails = async (id: number) => {
     router.push(`/admin/department/${id}`);
   };
 
-  const handleOnEdit = async (id: string) => {
+  const handleOnEdit = async (id: number) => {
     await GetByIdDepartment(id)
     router.push(`/admin/department/update/${id}`);
   };

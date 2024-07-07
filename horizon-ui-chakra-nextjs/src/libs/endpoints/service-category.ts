@@ -9,7 +9,7 @@ const Url = `${baseUrl}/ServiceCategory`;
  */
 export async function getServiceCategory(): Promise<IServiceCategoryList[]> {
   const data = await fetchApi<any>(Url, "GET");
-  let ServiceCategorys = data.value;
+  let ServiceCategorys = data.value.data;
   return ServiceCategorys;
 }
 /**
@@ -17,8 +17,8 @@ export async function getServiceCategory(): Promise<IServiceCategoryList[]> {
  * @param id - the id of the ServiceCategory to delete.
  * @returns a promise resolving to a success message upon successful deletion.
  */
-export async function deleteServiceCategory(id: string): Promise<string> {
-  const data = await fetchApi<any>(`${Url}?id=${id}`, "DELETE");
+export async function deleteServiceCategory(id: number): Promise<string> {
+  const data = await fetchApi<any>(`${Url}/${id}`, "DELETE");
   return data.successMessage;
 }
 /**
@@ -26,7 +26,7 @@ export async function deleteServiceCategory(id: string): Promise<string> {
  * @param id - the id of the ServiceCategory to retrieve.
  * @returns a promise resolving to an ServiceCategory object.
  */
-export async function getByIdServiceCategory(id: string): Promise<IServiceCategoryList> {
+export async function getByIdServiceCategory(id: number): Promise<IServiceCategoryList> {
   const data = await fetchApi<any>(`${Url}/${id}`, "GET");
   let ServiceCategorys = data.value;
   return ServiceCategorys;
@@ -37,7 +37,7 @@ export async function getByIdServiceCategory(id: string): Promise<IServiceCatego
  * @param id - the id of the ServiceCategory to be updated.
  * @returns a promise resolving to a success message upon successful update.
  */
-export async function updateServiceCategory(BodyData: IServiceCategory, id: string): Promise<string> {
+export async function updateServiceCategory(BodyData: IServiceCategory, id: number): Promise<string> {
   const data = await fetchApi<any>(`${Url}/${id}`, "PUT", JSON.stringify(BodyData));
   return data.successMessage;
 }
@@ -50,3 +50,4 @@ export async function addServiceCategory(BodyData: IServiceCategory): Promise<st
   const data = await fetchApi<any>(Url, "POST", JSON.stringify(BodyData));
   return data.successMessage;
 }
+

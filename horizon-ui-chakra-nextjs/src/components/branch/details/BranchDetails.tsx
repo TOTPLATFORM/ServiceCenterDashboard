@@ -9,7 +9,7 @@ import {  IBranchList } from 'types/Branch';
 import { useRouter } from 'next/navigation';
 import { getByIdBranch } from 'libs/endpoints/branch';
 
-const BranchDetails = ({ id }: { id: string }) => {
+const BranchDetails = ({ id }: { id: number }) => {
   const [Branch, setBranch] = useState<IBranchList>();
  
   const router = useRouter();

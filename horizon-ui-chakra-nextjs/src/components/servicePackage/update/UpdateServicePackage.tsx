@@ -9,7 +9,7 @@ import { IServicePackageList, IServicePackage } from 'types/ServicePackage';
 import { GetByIdServicePackage, UpdateServicePackage } from 'libs/endpoints/servicePackage';
 import { GetService } from 'libs/endpoints/service';
 
-const ServicePackageUpdateForm = ({ id }: { id: string }) => {
+const ServicePackageUpdateForm = ({ id }: { id: number }) => {
   const [ServicePackage, setServicePackage] = useState<IServicePackageList>();
   const [Category, setCategory] = useState([]);
   const router = useRouter();
@@ -47,9 +47,7 @@ const ServicePackageUpdateForm = ({ id }: { id: string }) => {
       { label: 'Package Description', name: 'packageDescription', inputType: 'text', placeholder: 'Package Description' },
       { label: 'Package Price', name: 'packagePrice', inputType: 'number', placeholder: 'Package Price' },
     ],
-    dropDownLists:[
-      {label: "Service", name: "serviceId", placeholder: "Package", value: "id", displayName: "serviceName", data: Category},
-      ],
+    
     heading: 'Update ServicePackage',
     data: ServicePackage,
     onSubmit: handleSubmit,
@@ -60,7 +58,6 @@ const ServicePackageUpdateForm = ({ id }: { id: string }) => {
       title={fields.title}
       disabled={fields.disabled}
       fields={fields.fields}
-      dropDownLists={fields.dropDownLists}
       heading={fields.heading}
       data={fields.data}
       onSubmit={handleSubmit}

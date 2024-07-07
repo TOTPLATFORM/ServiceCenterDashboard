@@ -1,0 +1,1 @@
+export { default as AddProductBrand } from './AddProductBrand';

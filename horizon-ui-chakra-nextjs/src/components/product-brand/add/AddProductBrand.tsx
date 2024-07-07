@@ -7,6 +7,8 @@ import { addProductBrand, getProductBrand } from "libs/endpoints/product-brand";
 const AddProductBrand = () => {
     const [ProductBrand, setProductBrand] = useState([]);
     const router = useRouter();
+
+
     const handleSubmit = async (formData: any) => {
         await addProductBrand(formData);
         router.push("/admin/product-brand");

@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { IProductBrand, IProductBrandList } from 'types/ProductBrand';
 import { getByIdProductBrand, updateProductBrand } from 'libs/endpoints/product-brand';
 
-const ProductBrandUpdateForm = ({ id }: { id: string }) => {
+const ProductBrandUpdateForm = ({ id }: { id: number }) => {
   const [ProductBrand, setProductBrand] = useState<IProductBrandList>();
 
   const router = useRouter();

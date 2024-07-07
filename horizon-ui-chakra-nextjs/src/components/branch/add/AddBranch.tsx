@@ -5,9 +5,12 @@ import { useRouter } from 'next/navigation';
 import { addBranch, getBranch } from "libs/endpoints/branch";
 import { getCenter } from "libs/endpoints/center";
 import { IBranch } from "types/Branch";
+import { ICenterList } from "types/Center";
+import { enumToArray } from "utils/enumUtils";
+import { City, Country } from "types/Contact";
 
 const AddBranch = () => {
-    const [Center, setCenter] = useState([]);
+
     const router = useRouter();
     const handleSubmit = async (formData: any) => {
 
@@ -20,17 +23,16 @@ const AddBranch = () => {
                 country: formData.country,
                 postalCode: formData.postalCode
             },
-            centerId: formData.centerId
+          
         }
 
         await addBranch(branch);
         router.push("/admin/branch");
     }
 
-    const fetchCenters = async () => {
-        let Centers = await getCenter();
-        setCenter(Centers);
-    }
+   
+    const cityOptions = enumToArray(City);
+    const countryOptions = enumToArray(Country);
 
     let fields: IFieldsProps = {
         title: "Add Branch",
@@ -39,21 +41,17 @@ const AddBranch = () => {
             {label: "Name", name: "branchName", inputType: "text", placeholder: "Name"},
             {label: "Phone Number", name: "branchPhoneNumber", inputType: "text", placeholder: "Phone Number"},
             {label: "Email Address", name: "emailAddress", inputType: "text", placeholder: "Email Address"},
-            {label: "City", name: "city", inputType: "text", placeholder: "City"},
-            {label: "country", name: "country", inputType: "text", placeholder: "country"},
+            {label: "City", name: "city", inputType: "select",  placeholder: "Select City", options: cityOptions },
+            {label: "country", name: "country", inputType: "select", placeholder: "Select Country" , options:countryOptions},
             {label: "Postal Code", name: "postalCode", inputType: "text", placeholder: "Postal Code"}
         ],
-        dropDownLists: [
-            {label: "Center", name: "centerId", placeholder: "Center", value: "id", displayName:"centerName", data: Center },
-          ],
+       
         heading: "Create Branch",
         onSubmit: handleSubmit,
        
       }
 
-      useEffect(() => {
-        fetchCenters();
-    },[]);
+   
 
       return (
         <CompactForm

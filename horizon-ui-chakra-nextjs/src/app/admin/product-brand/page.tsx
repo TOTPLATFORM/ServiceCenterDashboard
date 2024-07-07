@@ -16,16 +16,16 @@ const Page = () => {
   const textColor = useColorModeValue('secondaryGray.900', 'white');
   const router = useRouter();
 
-  const viewProductBrandDetails = async (id: string) => {
+  const viewProductBrandDetails = async (id: number) => {
     router.push(`/admin/product-brand/${id}`);
   };
 
-  const handleOnEdit = async (id: string) => {
+  const handleOnEdit = async (id: number) => {
     await getByIdProductBrand(id);
     router.push(`/admin/product-brand/update/${id}`);
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: number) => {
     await deleteProductBrand(id);
     loadData();
     router.push(`/admin/product-brand`);
@@ -36,7 +36,6 @@ const Page = () => {
       if (data) {
         setProductBrands((prev) => ({
           headers: [
-            {title: 'id', field: 'id' },
             {title: "Nama", field: "brandName"},
             {title: "Description", field: "brandDescription"},
             {title: "Country of Origin", field: "countryOfOrigin"},

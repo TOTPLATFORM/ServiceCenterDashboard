@@ -18,7 +18,7 @@ export async function getVendor(): Promise<IVendorList[]> {
  * @returns a promise resolving to a success message upon successful deletion.
  */
 export async function deleteVendor(id: string): Promise<string> {
-  const data = await fetchApi<any>(`${Url}?id=${id}`, "DELETE");
+  const data = await fetchApi<any>(`${Url}/${id}`, "DELETE");
   return data.successMessage;
 }
 /**

@@ -4,6 +4,8 @@ import CompactForm, { IFieldsProps } from "components/common/compact-form/Compac
 import { useRouter } from 'next/navigation';
 import { addCampagin, getCampagin } from "libs/endpoints/campagin";
 import { getProduct } from "libs/endpoints/product";
+import { enumToArray } from "utils/enumUtils";
+import { CampaginStatus } from "types/Campagin";
 
 const AddCampagin = () => {
     const router = useRouter();
@@ -12,6 +14,8 @@ const AddCampagin = () => {
         router.push("/admin/campagin");
     }
 
+    const statusOptions = enumToArray(CampaginStatus);
+
     let fields: IFieldsProps = {
         title: "Add Campagin",
         disabled: false,
@@ -19,8 +23,7 @@ const AddCampagin = () => {
             {label: "Name", name: "campaginName", inputType: "text", placeholder: "Name"},
             {label: "Description", name: "campaginDescription", inputType: "text", placeholder: "Description"},
             {label: "Goals", name: "goals", inputType: "text", placeholder: "Goals"},
-            {label: "Status", name: "status", inputType: "text", placeholder: "Status"},
-            {label: "Start Date", name: "startDate", inputType: "date", placeholder: "Start Date"},
+            {label: "Gender", name: "gender", inputType: "select", placeholder: "Select Status" , options: statusOptions},            {label: "Start Date", name: "startDate", inputType: "date", placeholder: "Start Date"},
             {label: "End Date", name: "endDate", inputType: "date", placeholder: "End Date"},
             {label: "Budget", name: "budget", inputType: "number", placeholder: "Budget"},
         ],

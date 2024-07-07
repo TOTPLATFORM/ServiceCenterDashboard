@@ -1,0 +1,1 @@
+export { default as UpdateProductCategory } from './UpdateProductCategory';

@@ -10,7 +10,7 @@ const Url = `${baseUrl}/ServicePackage`;
  */
 export async function GetServicePackage(): Promise<IServicePackageList[]> {
   const data = await fetchApi<any>(Url, "GET");
-  let servicePackages = data.value;
+  let servicePackages = data.value.data;
   return servicePackages;
 }
 
@@ -30,7 +30,7 @@ export async function AddServicePackage(BodyData: IServicePackage): Promise<stri
  * @param id - The ID of the ServicePackage to be updated.
  * @returns A promise resolving to a success message upon successful update.
  */
-export async function UpdateServicePackage(BodyData: IServicePackage, id: string): Promise<string> {
+export async function UpdateServicePackage(BodyData: IServicePackage, id: number): Promise<string> {
   const data = await fetchApi<any>(`${Url}/${id}`, "PUT", JSON.stringify(BodyData));
   return data.successMessage;
 }
@@ -40,7 +40,7 @@ export async function UpdateServicePackage(BodyData: IServicePackage, id: string
  * @param id - The ID of the ServicePackage to retrieve.
  * @returns A promise resolving to an ServicePackage object.
  */
-export async function GetByIdServicePackage(id: string): Promise<IServicePackageList> {
+export async function GetByIdServicePackage(id: number): Promise<IServicePackageList> {
   const data = await fetchApi<any>(`${Url}/${id}`, "GET");
   let category = data.value;
   return category;
@@ -51,7 +51,7 @@ export async function GetByIdServicePackage(id: string): Promise<IServicePackage
  * @param id - The ID of the ServicePackage to delete.
  * @returns A promise resolving to a success message upon successful deletion.
  */
-export async function DeleteServicePackage(id: string): Promise<string> {
-  const data = await fetchApi<any>(`${Url}?id=${id}`, "DELETE");
+export async function DeleteServicePackage(id: number): Promise<string> {
+  const data = await fetchApi<any>(`${Url}/${id}`, "DELETE");
   return data.successMessage;
 }

@@ -2,20 +2,22 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import CompactForm, {
-  IFieldsProps,
-} from 'components/common/compact-form/CompactForm';
+import  CompactForm, {IFieldsProps} from 'components/common/compact-form/CompactForm';
 import { useRouter } from 'next/navigation';
-import { ICenter, ICenterList } from 'types/Center';
-import { getByIdCenter, updateCenter } from 'libs/endpoints/center';
+import { ICenter } from 'types/Center';
+import {  getCenter, updateCenter } from 'libs/endpoints/center';
 
-const CenterUpdateForm = ({ id }: { id: string }) => {
-  const [Center, setCenter] = useState<ICenterList>();
+const CenterUpdateForm = ({ id }: { id: number }) => {
+
+
+  const [Center, setCenter] = useState<ICenter|undefined>();
 
   const router = useRouter();
 
+
+
   const fetchCenter = async () => {
-    setCenter(await getByIdCenter(id));
+    setCenter(await getCenter());
   };
 
   

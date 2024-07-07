@@ -20,12 +20,12 @@ const Page = () => {
     router.push(`/admin/branch/${id}`);
   };
 
-  const handleOnEdit = async (id: string) => {
+  const handleOnEdit = async (id: number) => {
     await getByIdBranch(id);
     router.push(`/admin/branch/update/${id}`);
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: number) => {
     await deleteBranch(id);
     loadData();
     router.push(`/admin/branch`);
@@ -42,8 +42,7 @@ const Page = () => {
             {title: "Country", field: "country"},  
             {title: "Postal Code", field: "postalCode"},
             {title: "Phone Number", field: "branchPhoneNumber"},
-            {title: "Email Address", field: "emailAddress"},
-            {title: "Center Name", field: "centerName"},         
+            {title: "Email Address", field: "emailAddress"}
           ],
           data: data,
         }));
@@ -81,10 +80,10 @@ const Page = () => {
             <button
               type="button"
               style={{
-                backgroundColor: 'blue' /* Green background */,
+                backgroundColor: 'blue' ,
                 border: 'none',
                 color: 'white',
-                padding: '10px 20px' /* Some padding */,
+                padding: '10px 20px' ,
                 textAlign: 'center',
                 textDecoration: 'none',
                 display: 'inline-block',

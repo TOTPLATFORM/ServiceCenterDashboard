@@ -36,9 +36,7 @@ const Page = () => {
       if (data) {
         setProductCategorys((prev) => ({
           headers: [
-            {title: 'id', field: 'id' },
             {title: "Name", field: "categoryName"},
-            {title: "Reference Number", field: "referenceNumber"},       
           ],
           data: data,
         }));

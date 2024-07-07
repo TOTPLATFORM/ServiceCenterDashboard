@@ -8,25 +8,21 @@ import CompactForm, {
 import { useRouter } from 'next/navigation';
 import { IBranch, IBranchList } from 'types/Branch';
 import { getByIdBranch, updateBranch } from 'libs/endpoints/branch';
-import { getCenter } from 'libs/endpoints/center';
+import { enumToArray } from 'utils/enumUtils';
+import { City, Country } from 'types/Contact';
 
-const BranchUpdateForm = ({ id }: { id: string }) => {
+const BranchUpdateForm = ({ id }: { id: number }) => {
   const [Branch, setBranch] = useState<IBranchList>();
-  const [Center, setCenter] = useState([]);
   const router = useRouter();
 
   const fetchBranch = async () => {
     setBranch(await getByIdBranch(id));
   };
 
-  const fetchCenters = async () => {
-    let Centers = await getCenter();
-    setCenter(Centers);
-    }
+ 
     
   useEffect(() => {
     fetchBranch();
-    fetchCenters();
 }, [])
 
   const handleSubmit = async (formData: any) => {
@@ -40,12 +36,14 @@ const BranchUpdateForm = ({ id }: { id: string }) => {
             country: formData.country,
             postalCode: formData.postalCode
         },
-        centerId: formData.centerId
     }
 
     await updateBranch(branch, id);
     router.push('/admin/branch');
   };
+
+  const cityOptions = enumToArray(City);
+    const countryOptions = enumToArray(Country);
 
   let fields: IFieldsProps = {
     title: 'Update Branch ',
@@ -54,13 +52,11 @@ const BranchUpdateForm = ({ id }: { id: string }) => {
         {label: "Name", name: "branchName", inputType: "text", placeholder: "Name"},
         {label: "Phone Number", name: "branchPhoneNumber", inputType: "text", placeholder: "Phone Number"},
         {label: "Email Address", name: "emailAddress", inputType: "text", placeholder: "Email Address"},
-        {label: "City", name: "city", inputType: "text", placeholder: "City"},
-        {label: "country", name: "country", inputType: "text", placeholder: "country"},
+        {label: "City", name: "city", inputType: "select",  placeholder: "Select City", options: cityOptions },
+        {label: "country", name: "country", inputType: "select", placeholder: "Select Country" , options:countryOptions},
         {label: "Postal Code", name: "postalCode", inputType: "text", placeholder: "Postal Code"}
     ],
-    dropDownLists: [
-        {label: "Center", name: "centerId", placeholder: "Center", value: "id", displayName:"centerName", data: Center },
-      ],
+  
     heading: 'Update Branch',
     data: Branch,
     onSubmit: handleSubmit,
@@ -71,7 +67,6 @@ const BranchUpdateForm = ({ id }: { id: string }) => {
       title={fields.title}
       disabled={fields.disabled}
       fields={fields.fields}
-      dropDownLists={fields.dropDownLists}
       heading={fields.heading}
       data={fields.data}
       onSubmit={handleSubmit}

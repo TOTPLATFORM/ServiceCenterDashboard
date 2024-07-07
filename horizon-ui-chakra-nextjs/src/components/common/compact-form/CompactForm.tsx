@@ -9,7 +9,7 @@ export interface IFieldsProps {
     disabled: boolean,
     heading: string,
     title:string,
-    fields: Array<{label: string, name: string, inputType: string, placeholder: string}>,
+    fields: Array<{label: string, name: string, inputType: string, placeholder: string, options?: {label : string ; value : string;}[] }>,
     data?: any,
     dropDownLists?: Array<{label: string, name: string, placeholder: string, value: string, displayName: string, data: Array<any>}>,
     onSubmit: (formData: any) => void,
@@ -82,6 +82,21 @@ export interface IFieldsProps {
                             >
                                 {field.label}
                             </FormLabel>
+                            {field.inputType === 'select' ? (
+                                <Select
+                                    placeholder={field.placeholder}
+                                    onChange={handleChange}
+                                    name={field.name}
+                                    mb="24px"
+                                    size="lg"
+                                    variant="auth"
+                                    value={formData[field.name] || ''}
+                                >
+                                    {field.options?.map(option => (
+                                        <option key={option.value} value={option.value}>{option.label}</option>
+                                    ))}
+                                </Select>
+                            ) : (
                             <Input
                                 isRequired={true}
                                 variant="auth"
@@ -98,6 +113,7 @@ export interface IFieldsProps {
                                 onChange={handleChange}
                                 isDisabled={disabled}
                             />
+                            )}
                         </React.Fragment>
                     ))}
                     {dropDownLists && (

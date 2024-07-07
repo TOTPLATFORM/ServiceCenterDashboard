@@ -16,16 +16,16 @@ const Page = () => {
   const textColor = useColorModeValue('secondaryGray.900', 'white');
   const router = useRouter();
 
-  const viewCampaginDetails = async (id: string) => {
+  const viewCampaginDetails = async (id: number) => {
     router.push(`/admin/campagin/${id}`);
   };
 
-  const handleOnEdit = async (id: string) => {
+  const handleOnEdit = async (id: number) => {
     await getByIdCampagin(id);
     router.push(`/admin/campagin/update/${id}`);
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: number) => {
     await deleteCampagin(id);
     loadData();
     router.push(`/admin/campagin`);
@@ -36,7 +36,6 @@ const Page = () => {
       if (data) {
         setCampagins((prev) => ({
           headers: [
-            {title: 'id', field: 'id' },
             {title: "Campagin Name", field: "campaginName"},
             {title: "Description", field: "campaginDescription"},
           ],

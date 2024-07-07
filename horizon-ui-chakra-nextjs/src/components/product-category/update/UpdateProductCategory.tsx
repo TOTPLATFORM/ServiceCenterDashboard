@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { IProductCategory, IProductCategoryList } from 'types/ProductCategory';
 import { getByIdProductCategory, updateProductCategory } from 'libs/endpoints/product-category';
 
-const ProductCategoryUpdateForm = ({ id }: { id: string }) => {
+const ProductCategoryUpdateForm = ({ id }: { id: number }) => {
   const [ProductCategory, setProductCategory] = useState<IProductCategoryList>();
 
   const router = useRouter();
@@ -32,7 +32,6 @@ const ProductCategoryUpdateForm = ({ id }: { id: string }) => {
     disabled: false,
     fields: [
         {label: "Name", name: "categoryName", inputType: "text", placeholder: "Name"},
-        {label: "Reference Number", name: "referenceNumber", inputType: "number", placeholder: "Reference Number"}
     ],
    
     heading: 'Update ProductCategory',

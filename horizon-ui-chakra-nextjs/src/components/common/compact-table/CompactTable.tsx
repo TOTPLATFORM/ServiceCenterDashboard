@@ -1,5 +1,5 @@
 import { Button, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 export interface IColumnsProps {
   headers: Array<{ title: string; field: string }>;
@@ -7,7 +7,9 @@ export interface IColumnsProps {
   hideHeader?: boolean;
   onClick?: (data: any) => void;
   onDelete?: (id: any) => void;
-  onUpdate?: (id: any) => void;
+  onUpdate?: (id: any,type?:any) => void;
+  children?:ReactNode;
+  background?:string
 }
 const CompactTable = ({
   headers,
@@ -16,6 +18,7 @@ const CompactTable = ({
   onClick,
   onUpdate,
   onDelete,
+  children,
 }: IColumnsProps) => {
   return (
     <React.Fragment>
@@ -43,27 +46,30 @@ const CompactTable = ({
                       onClick && onClick(item.id);
                     }} key={colIndex}>{item[row.field] ?? 'N/A'}</Td>
                   ))}
-
+                    {(onUpdate || onDelete) && (
                   <Td>
-                    <Button
-                      style={{
-                        backgroundColor: 'orange',
-                        border: 'none',
-                        color: 'white',
-                        padding: '10px 20px',
-                        textAlign: 'center',
-                        textDecoration: 'none',
-                        display: 'inline-block',
-                        fontSize: '16px',
-                        margin: '4px 2px',
-                        cursor: 'pointer',
-                        borderRadius: '5px',
-                      }}
-                      key={rowIndex}
-                      onClick={() => onUpdate(item.id)}
-                    >
-                      Update
-                    </Button>
+                    {onUpdate && (
+                       <Button
+                       style={{
+                         backgroundColor: 'orange',
+                         border: 'none',
+                         color: 'white',
+                         padding: '10px 20px',
+                         textAlign: 'center',
+                         textDecoration: 'none',
+                         display: 'inline-block',
+                         fontSize: '16px',
+                         margin: '4px 2px',
+                         cursor: 'pointer',
+                         borderRadius: '5px',
+                       }}
+                       key={rowIndex}
+                       onClick={() => onUpdate(item.id)}
+                     >
+                       Update
+                     </Button>
+                    )}
+                     {onDelete && (
                     <Button
                       style={{
                         backgroundColor: 'red' ,
@@ -83,11 +89,27 @@ const CompactTable = ({
                     >
                       Delete
                     </Button>
+                     )}
                   </Td>
+                   )}
                 </Tr>
               ))}
+               {children && <div
+               style={{
+                border: 'none',
+                color: 'white',
+                padding: '10px 20px',
+                textAlign: 'center',
+                textDecoration: 'none',
+                display: 'inline-block',
+                fontSize: '16px',
+                margin: '4px 2px',
+                cursor: 'pointer',
+                borderRadius: '5px',
+              }}>{children}</div>}
             </Tbody>
           </Table>
+         
         </div>
       ) : (
         <col>

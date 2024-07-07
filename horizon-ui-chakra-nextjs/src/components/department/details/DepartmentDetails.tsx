@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { IDepartmentList } from 'types/Department';
 import { GetByIdDepartment } from 'libs/endpoints/department';
 
-const DepartmentDetails = ({ id }: { id: string }) => {
+const DepartmentDetails = ({ id }: { id: number }) => {
   const [department, setDepartment] = useState<IDepartmentList>();
 
   const router = useRouter();
@@ -29,7 +29,7 @@ const DepartmentDetails = ({ id }: { id: string }) => {
     title: 'Department Details',
     disabled: true,
     fields: [
-      { label: 'Department Name ', name: 'name', inputType: 'text', placeholder: 'Department Name' }
+      { label: 'Department Name ', name: 'departmentName', inputType: 'text', placeholder: 'Department Name' }
     ],
     heading: 'Back to Departments',
     data: department,

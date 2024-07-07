@@ -8,9 +8,10 @@ import { useRouter } from 'next/navigation';
 import { AddDepartment } from 'libs/endpoints/department';
 import { IDepartment } from 'types/Department';
 import { getCenter } from 'libs/endpoints/center';
+import {  ICenterList } from 'types/Center';
 
 const DepartmentAddForm = () => {
-  const [Center, setCenter] = useState([]);
+  const [Center, setCenter] = useState<ICenterList>();
   const router = useRouter();
 
   const fetchCenter = async () => {
@@ -32,9 +33,6 @@ const DepartmentAddForm = () => {
     disabled: false,
     fields: [
       { label: 'Department Name ', name: 'departmentName', inputType: 'text', placeholder: 'Department Name' },
-    ],
-    dropDownLists:[
-       {label: "Centers", name: "centerId", placeholder: "Center", value: "id", displayName: "centerName", data: Center},
     ],
     heading: 'Add Department',
     onSubmit: handleSubmit,

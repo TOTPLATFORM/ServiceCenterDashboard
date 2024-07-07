@@ -6,11 +6,11 @@ import CompactForm, {
   IFieldsProps,
 } from 'components/common/compact-form/CompactForm';
 import { useRouter } from 'next/navigation';
-import { ICampagin, ICampaginList } from 'types/Campagin';
+import { CampaginStatus, ICampagin, ICampaginList } from 'types/Campagin';
 import { getByIdCampagin, updateCampagin } from 'libs/endpoints/campagin';
-import { getProduct } from 'libs/endpoints/product';
+import { enumToArray } from 'utils/enumUtils';
 
-const CampaginUpdateForm = ({ id }: { id: string }) => {
+const CampaginUpdateForm = ({ id }: { id: number }) => {
   const [Campagin, setCampagin] = useState<ICampaginList>();
   const router = useRouter();
 
@@ -29,6 +29,9 @@ const CampaginUpdateForm = ({ id }: { id: string }) => {
     router.push('/admin/campagin');
   };
 
+  const statusOptions = enumToArray(CampaginStatus);
+
+
   let fields: IFieldsProps = {
     title: 'Update Campagin ',
     disabled: false,
@@ -36,7 +39,8 @@ const CampaginUpdateForm = ({ id }: { id: string }) => {
       {label: "Name", name: "campaginName", inputType: "text", placeholder: "Name"},
       {label: "Description", name: "campaginDescription", inputType: "text", placeholder: "Description"},
       {label: "Goals", name: "goals", inputType: "text", placeholder: "Goals"},
-      {label: "Status", name: "status", inputType: "text", placeholder: "Status"},
+      {label: "Status", name: "status", inputType: "select", placeholder: "Select Status" , options: statusOptions},          
+      {label: "Start Date", name: "startDate", inputType: "date", placeholder: "Start Date"},
       {label: "Start Date", name: "startDate", inputType: "date", placeholder: "Start Date"},
       {label: "End Date", name: "endDate", inputType: "date", placeholder: "End Date"},
       {label: "Budget", name: "budget", inputType: "number", placeholder: "Budget"},

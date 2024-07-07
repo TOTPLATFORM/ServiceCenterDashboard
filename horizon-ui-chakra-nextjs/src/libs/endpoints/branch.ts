@@ -9,7 +9,7 @@ const Url = `${baseUrl}/Branch`;
  */
 export async function getBranch(): Promise<IBranchList[]> {
   const data = await fetchApi<any>(Url, "GET");
-  let Branchs = data.value;
+  let Branchs = data.value.data;
   return Branchs;
 }
 /**
@@ -17,8 +17,8 @@ export async function getBranch(): Promise<IBranchList[]> {
  * @param id - the id of the Branch to delete.
  * @returns a promise resolving to a success message upon successful deletion.
  */
-export async function deleteBranch(id: string): Promise<string> {
-  const data = await fetchApi<any>(`${Url}?id=${id}`, "DELETE");
+export async function deleteBranch(id: number): Promise<string> {
+  const data = await fetchApi<any>(`${Url}/${id}`, "DELETE");
   return data.successMessage;
 }
 /**
@@ -26,7 +26,7 @@ export async function deleteBranch(id: string): Promise<string> {
  * @param id - the id of the Branch to retrieve.
  * @returns a promise resolving to an Branch object.
  */
-export async function getByIdBranch(id: string): Promise<IBranchList> {
+export async function getByIdBranch(id: number): Promise<IBranchList> {
   const data = await fetchApi<any>(`${Url}/${id}`, "GET");
   let Branchs = data.value;
   return Branchs;
@@ -37,7 +37,7 @@ export async function getByIdBranch(id: string): Promise<IBranchList> {
  * @param id - the id of the Branch to be updated.
  * @returns a promise resolving to a success message upon successful update.
  */
-export async function updateBranch(BodyData: IBranch, id: string): Promise<string> {
+export async function updateBranch(BodyData: IBranch, id: number): Promise<string> {
   const data = await fetchApi<any>(`${Url}/${id}`, "PUT", JSON.stringify(BodyData));
   return data.successMessage;
 }

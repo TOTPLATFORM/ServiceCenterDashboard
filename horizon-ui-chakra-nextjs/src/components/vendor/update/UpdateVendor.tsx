@@ -10,10 +10,11 @@ import { IVendor, IVendorList } from 'types/Vendor';
 import { getByIdVendor, updateVendor } from 'libs/endpoints/vendor';
 import { GetDepartment } from 'libs/endpoints/department';
 import { getCenter } from 'libs/endpoints/center';
+import { ICenterList } from 'types/Center';
 
 const VendorUpdateForm = ({ id }: { id: string }) => {
   const [Vendor, setVendor] = useState<IVendorList>();
-  const [center, setCenter] = useState([]);
+  const [center, setCenter] = useState<ICenterList>();
   const router = useRouter();
 
   const fetchVendor = async () => {
@@ -50,9 +51,6 @@ const VendorUpdateForm = ({ id }: { id: string }) => {
         {label: "Contact Person", name: "contactPerson", inputType: "text", placeholder: "Contact Person"},
         {label: "Contract Start Date", name: "contractStartDate", inputType: "date", placeholder: "Contract Start Date"},
         {label: "Contract End Date", name: "contractEndDate", inputType: "date", placeholder: "Contract End Date"},
-      ],
-      dropDownLists: [
-        {label: "Center", name: "centerId", placeholder: "Center", value: "id", displayName:"centerName", data: center },
       ],
     heading: 'Update Vendor',
     data: Vendor,

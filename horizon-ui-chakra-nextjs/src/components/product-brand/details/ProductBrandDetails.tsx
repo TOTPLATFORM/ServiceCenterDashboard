@@ -9,7 +9,7 @@ import {  IProductBrandList } from 'types/ProductBrand';
 import { useRouter } from 'next/navigation';
 import { getByIdProductBrand } from 'libs/endpoints/product-brand';
 
-const ProductBrandDetails = ({ id }: { id: string }) => {
+const ProductBrandDetails = ({ id }: { id: number }) => {
   const [ProductBrand, setProductBrand] = useState<IProductBrandList>();
  
   const router = useRouter();

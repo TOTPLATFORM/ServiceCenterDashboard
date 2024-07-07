@@ -9,7 +9,7 @@ const Url = `${baseUrl}/Campagin`;
  */
 export async function getCampagin(): Promise<ICampaginList[]> {
   const data = await fetchApi<any>(Url, "GET");
-  let Campagins = data.value;
+  let Campagins = data.value.data;
   return Campagins;
 }
 /**
@@ -17,8 +17,8 @@ export async function getCampagin(): Promise<ICampaginList[]> {
  * @param id - the id of the Campagin to delete.
  * @returns a promise resolving to a success message upon successful deletion.
  */
-export async function deleteCampagin(id: string): Promise<string> {
-  const data = await fetchApi<any>(`${Url}?id=${id}`, "DELETE");
+export async function deleteCampagin(id: number): Promise<string> {
+  const data = await fetchApi<any>(`${Url}/${id}`, "DELETE");
   return data.successMessage;
 }
 /**
@@ -26,7 +26,7 @@ export async function deleteCampagin(id: string): Promise<string> {
  * @param id - the id of the Campagin to retrieve.
  * @returns a promise resolving to an Campagin object.
  */
-export async function getByIdCampagin(id: string): Promise<ICampaginList> {
+export async function getByIdCampagin(id: number): Promise<ICampaginList> {
   const data = await fetchApi<any>(`${Url}/${id}`, "GET");
   let Campagins = data.value;
   return Campagins;
@@ -37,7 +37,7 @@ export async function getByIdCampagin(id: string): Promise<ICampaginList> {
  * @param id - the id of the Campagin to be updated.
  * @returns a promise resolving to a success message upon successful update.
  */
-export async function updateCampagin(BodyData: ICampagin, id: string): Promise<string> {
+export async function updateCampagin(BodyData: ICampagin, id: number): Promise<string> {
   const data = await fetchApi<any>(`${Url}/${id}`, "PUT", JSON.stringify(BodyData));
   return data.successMessage;
 }

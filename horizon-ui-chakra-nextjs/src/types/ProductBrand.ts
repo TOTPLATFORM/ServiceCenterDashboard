@@ -1,18 +1,18 @@
 export interface IProductBrandList
 {  
 	id: number;
-    name: string,
-    description: string,
-    logoUrl: string,
-    establishedDate: Date,
+    brandName: string,
+    brandDescription: string,
+    countryOfOrigin: string,
+    foundedYear: Date,
     CreatedDate: Date,
     UpdatedDAte: Date
 	
 }
 export interface IProductBrand
 { 
-    name: string,
-    description: string,
-    logoUrl: string,
-    establishedDate: Date,
+    brandName: string,
+    brandDescription: string,
+    countryOfOrigin: string,
+    foundedYear: Date,
 }

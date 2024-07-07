@@ -1,31 +1,60 @@
 export interface IContactList
 {  
-	id: number;
+	id: string;
     firstName: string,
     lastName: string,
     email: string,
-    gender: string,
-    city: string,
-    country: string,
+    gender: Gender,
+    city: City,
+    country: Country,
 	postalCode: string,
     status: string
 }
 export interface IContact
 { 
-    contactFirstName: string,
-    contactLastName: string,
-    contactEmail: string,
-    gender: string,
+    firstName: string,
+    lastName: string,
+    dateOfBirth:Date,
+    email: string,
+    phoneNumber : string,
+    userName:string,
+    password:string,
+    gender: Gender,
     address: Address
 }
 export interface Address
 {
-    city: string,
-    country: string,
+    city: City,
+    country: Country,
 	postalCode: string,
 }
 
-export interface Status
+export enum Status
 {
-    status: string
+Lead , 
+Oppurtienty,
+Cancelled,
+Customer
+}
+export enum Gender {
+female , 
+male 
+}
+export enum City
+{
+    Cairo,
+    Giza,
+    Monufia,
+    Alexandria,
+    Sharqia,
+    Beheira
+}
+
+export enum Country
+{
+    Egypt,
+    Bahrain,
+    Canada,
+    China,
+    France
 }

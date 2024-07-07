@@ -3,18 +3,21 @@ import React, {useState, useEffect } from "react";
 import CompactForm, { IFieldsProps } from "components/common/compact-form/CompactForm";
 import { useRouter } from 'next/navigation';
 import { addCenter, getCenter } from "libs/endpoints/center";
+import { ICenterList } from "types/Center";
 
 const AddCenter = () => {
-    const [Center, setCenter] = useState([]);
+    const [Center, setCenter] = useState<ICenterList>();
     const router = useRouter();
+
+
     const handleSubmit = async (formData: any) => {
         await addCenter(formData);
         router.push("/admin/center");
     }
 
     const fetchCenters = async () => {
-        let Centers = await getCenter();
-        setCenter(Centers);
+        let centers = await getCenter();
+        setCenter(centers);
     }
 
     let fields: IFieldsProps = {
@@ -25,6 +28,7 @@ const AddCenter = () => {
             {label: "Opening Hours", name: "openingHours", inputType: "number", placeholder: "Opening Hours"},
             {label: "Specialty", name: "specialty", inputType: "text", placeholder: "Specialty"}
         ],
+        data:Center,
         heading: "Create Center",
         onSubmit: handleSubmit,
        
@@ -42,7 +46,6 @@ const AddCenter = () => {
         fields={fields.fields} 
         heading={fields.heading}
         data={fields.data}
-        dropDownLists={fields.dropDownLists}
         onSubmit={handleSubmit}>
         </CompactForm>
       

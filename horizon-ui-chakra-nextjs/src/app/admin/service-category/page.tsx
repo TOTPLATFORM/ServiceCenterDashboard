@@ -16,16 +16,16 @@ const Page = () => {
   const textColor = useColorModeValue('secondaryGray.900', 'white');
   const router = useRouter();
 
-  const viewServiceCategoryDetails = async (id: string) => {
+  const viewServiceCategoryDetails = async (id: number) => {
     router.push(`/admin/service-category/${id}`);
   };
 
-  const handleOnEdit = async (id: string) => {
+  const handleOnEdit = async (id: number) => {
     await getByIdServiceCategory(id);
     router.push(`/admin/service-category/update/${id}`);
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: number) => {
     await deleteServiceCategory(id);
     loadData();
     router.push(`/admin/service-category`);
@@ -36,7 +36,7 @@ const Page = () => {
       if (data) {
         setServiceCategorys((prev) => ({
           headers: [
-            {title: 'id', field: 'id' },
+
             {title: "Name", field: "serviceCategoryName"},
             {title: "Description", field: "serviceCategoryDescription"},       
           ],

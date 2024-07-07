@@ -10,7 +10,7 @@ const Url = `${baseUrl}/Department`;
  */
 export async function GetDepartment(): Promise<IDepartmentList[]> {
   const data = await fetchApi<any>(Url, "GET");
-  let departments = data.value;
+  let departments = data.value.data;
   return departments;
 }
 
@@ -30,7 +30,7 @@ export async function AddDepartment(BodyData: IDepartment): Promise<string> {
  * @param id - The ID of the Department to be updated.
  * @returns A promise resolving to a success message upon successful update.
  */
-export async function UpdateDepartment(BodyData: IDepartment, id: string): Promise<string> {
+export async function UpdateDepartment(BodyData: IDepartment, id: number): Promise<string> {
   const data = await fetchApi<any>(`${Url}/${id}`, "PUT", JSON.stringify(BodyData));
   return data.successMessage;
 }
@@ -40,7 +40,7 @@ export async function UpdateDepartment(BodyData: IDepartment, id: string): Promi
  * @param id - The ID of the Department to retrieve.
  * @returns A promise resolving to an Department object.
  */
-export async function GetByIdDepartment(id: string): Promise<IDepartmentList> {
+export async function GetByIdDepartment(id: number): Promise<IDepartmentList> {
   const data = await fetchApi<any>(`${Url}/${id}`, "GET");
   let category = data.value;
   return category;
@@ -51,7 +51,7 @@ export async function GetByIdDepartment(id: string): Promise<IDepartmentList> {
  * @param id - The ID of the Department to delete.
  * @returns A promise resolving to a success message upon successful deletion.
  */
-export async function DeleteDepartment(id: string): Promise<string> {
-  const data = await fetchApi<any>(`${Url}?id=${id}`, "DELETE");
+export async function DeleteDepartment(id: number): Promise<string> {
+  const data = await fetchApi<any>(`${Url}/${id}`, "DELETE");
   return data.successMessage;
 }

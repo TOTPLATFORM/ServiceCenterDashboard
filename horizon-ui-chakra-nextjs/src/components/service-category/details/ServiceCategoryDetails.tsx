@@ -9,7 +9,7 @@ import {  IServiceCategoryList } from 'types/ServiceCategory';
 import { useRouter } from 'next/navigation';
 import { getByIdServiceCategory } from 'libs/endpoints/service-category';
 
-const ServiceCategoryDetails = ({ id }: { id: string }) => {
+const ServiceCategoryDetails = ({ id }: { id: number }) => {
   const [ServiceCategory, setServiceCategory] = useState<IServiceCategoryList>();
  
   const router = useRouter();

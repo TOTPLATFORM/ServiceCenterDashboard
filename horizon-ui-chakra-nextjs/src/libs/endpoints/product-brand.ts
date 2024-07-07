@@ -9,7 +9,7 @@ const Url = `${baseUrl}/ProductBrand`;
  */
 export async function getProductBrand(): Promise<IProductBrandList[]> {
   const data = await fetchApi<any>(Url, "GET");
-  let ProductBrands = data.value;
+  let ProductBrands = data.value.data;
   return ProductBrands;
 }
 /**
@@ -17,8 +17,8 @@ export async function getProductBrand(): Promise<IProductBrandList[]> {
  * @param id - the id of the ProductBrand to delete.
  * @returns a promise resolving to a success message upon successful deletion.
  */
-export async function deleteProductBrand(id: string): Promise<string> {
-  const data = await fetchApi<any>(`${Url}?id=${id}`, "DELETE");
+export async function deleteProductBrand(id: number): Promise<string> {
+  const data = await fetchApi<any>(`${Url}/${id}`, "DELETE");
   return data.successMessage;
 }
 /**
@@ -26,7 +26,7 @@ export async function deleteProductBrand(id: string): Promise<string> {
  * @param id - the id of the ProductBrand to retrieve.
  * @returns a promise resolving to an ProductBrand object.
  */
-export async function getByIdProductBrand(id: string): Promise<IProductBrandList> {
+export async function getByIdProductBrand(id: number): Promise<IProductBrandList> {
   const data = await fetchApi<any>(`${Url}/${id}`, "GET");
   let ProductBrands = data.value;
   return ProductBrands;
@@ -37,7 +37,7 @@ export async function getByIdProductBrand(id: string): Promise<IProductBrandList
  * @param id - the id of the ProductBrand to be updated.
  * @returns a promise resolving to a success message upon successful update.
  */
-export async function updateProductBrand(BodyData: IProductBrand, id: string): Promise<string> {
+export async function updateProductBrand(BodyData: IProductBrand, id: number): Promise<string> {
   const data = await fetchApi<any>(`${Url}/${id}`, "PUT", JSON.stringify(BodyData));
   return data.successMessage;
 }

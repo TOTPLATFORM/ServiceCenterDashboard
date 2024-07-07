@@ -18,7 +18,7 @@ export async function getTimeSlot(): Promise<ITimeSlotList[]> {
  * @returns a promise resolving to a success message upon successful deletion.
  */
 export async function deleteTimeSlot(id: string): Promise<string> {
-  const data = await fetchApi<any>(`${Url}?id=${id}`, "DELETE");
+  const data = await fetchApi<any>(`${Url}/${id}`, "DELETE");
   return data.successMessage;
 }
 /**
