@@ -132,9 +132,9 @@ const routes: IRoute[] = [
     icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
   },
   {
-    name: 'Time Slot',
+    name: 'Subscription',
     layout: '/admin',
-    path: '/timeSlot',
+    path: '/subscription',
     icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
   },
   {
@@ -172,13 +172,7 @@ const routes: IRoute[] = [
     layout: '/admin',
     path: '/campagin',
     icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
-  },
-  {
-    name: 'Overview',
-    layout: '/admin',
-    path: '/overview',
-    icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
-  },
+  }
 ];
 
 export default routes;

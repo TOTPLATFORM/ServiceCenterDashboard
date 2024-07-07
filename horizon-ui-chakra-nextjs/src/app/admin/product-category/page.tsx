@@ -20,12 +20,12 @@ const Page = () => {
     router.push(`/admin/product-category/${id}`);
   };
 
-  const handleOnEdit = async (id: string) => {
+  const handleOnEdit = async (id: number) => {
     await getByIdProductCategory(id);
     router.push(`/admin/product-category/update/${id}`);
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: number) => {
     await deleteProductCategory(id);
     loadData();
     router.push(`/admin/product-category`);
