@@ -1,5 +1,7 @@
 import { Button, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
 import React, { ReactNode } from 'react';
+import { headers } from '../../../../next.config';
+import { header } from 'utils/header';
 
 export interface IColumnsProps {
   headers: Array<{ title: string; field: string }>;
@@ -8,14 +10,13 @@ export interface IColumnsProps {
   onClick?: (data: any) => void;
   onDelete?: (id: any) => void;
   onUpdate?: (id: any,type?:any) => void;
-  children?:ReactNode;
-  background?:string
 }
 
 
 const getNestedValue = (obj: any, path: string) => {
   return path.split('.').reduce((acc, part) => acc && acc[part], obj);
 };
+
 
 const CompactTable = ({
   headers,
@@ -24,8 +25,11 @@ const CompactTable = ({
   onClick,
   onUpdate,
   onDelete,
-  children,
 }: IColumnsProps) => {
+
+  const filteredHeaders = headers.filter(header =>
+    data?.some(item => getNestedValue(item, header.field) !== null)
+  );
   return (
     <React.Fragment>
       {data ? (
@@ -34,7 +38,7 @@ const CompactTable = ({
             {!hideHeader && (
               <Thead>
                 <Tr>
-                  {headers.map((header, index) => (
+                {filteredHeaders.map((header, index) => (
                     <Th key={index}>{header.title}</Th>
                   ))}
                 </Tr>
@@ -100,19 +104,7 @@ const CompactTable = ({
                    )}
                 </Tr>
               ))}
-               {children && <div
-               style={{
-                border: 'none',
-                color: 'white',
-                padding: '10px 20px',
-                textAlign: 'center',
-                textDecoration: 'none',
-                display: 'inline-block',
-                fontSize: '16px',
-                margin: '4px 2px',
-                cursor: 'pointer',
-                borderRadius: '5px',
-              }}>{children}</div>}
+               
             </Tbody>
           </Table>
          
