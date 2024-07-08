@@ -1,7 +1,5 @@
 import { Button, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
 import React, { ReactNode } from 'react';
-import { headers } from '../../../../next.config';
-import { header } from 'utils/header';
 
 export interface IColumnsProps {
   headers: Array<{ title: string; field: string }>;
@@ -17,7 +15,6 @@ const getNestedValue = (obj: any, path: string) => {
   return path.split('.').reduce((acc, part) => acc && acc[part], obj);
 };
 
-
 const CompactTable = ({
   headers,
   data,
@@ -25,11 +22,13 @@ const CompactTable = ({
   onClick,
   onUpdate,
   onDelete,
+
 }: IColumnsProps) => {
 
   const filteredHeaders = headers.filter(header =>
     data?.some(item => getNestedValue(item, header.field) !== null)
   );
+
   return (
     <React.Fragment>
       {data ? (
@@ -37,8 +36,8 @@ const CompactTable = ({
           <Table>
             {!hideHeader && (
               <Thead>
-                <Tr>
-                {filteredHeaders.map((header, index) => (
+               <Tr>
+                  {filteredHeaders.map((header, index) => (
                     <Th key={index}>{header.title}</Th>
                   ))}
                 </Tr>
@@ -51,10 +50,15 @@ const CompactTable = ({
 
                   style={{ cursor: onClick ? 'pointer' : 'default' }}
                 >
-                  {headers.map((row, colIndex) => (
-                    <Td onClick={() => {
-                      onClick && onClick(item.id);
-                    }} key={colIndex}>{getNestedValue(item,row.field) ?? 'N/A'}</Td>
+                 {filteredHeaders.map((row, colIndex) => (
+                    <Td
+                      onClick={() => {
+                        onClick && onClick(item.id);
+                      }}
+                      key={colIndex}
+                    >
+                      {getNestedValue(item, row.field) ?? 'N/A'}
+                    </Td>
                   ))}
                     {(onUpdate || onDelete) && (
                   <Td>
