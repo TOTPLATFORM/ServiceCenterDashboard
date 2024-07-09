@@ -1,0 +1,1 @@
+export { default as AddManager } from './AddManager';

@@ -1,4 +1,4 @@
-import AddDepartment from "components/department/add/AddDepartment";
+import {AddDepartment} from "components/department/add";
 
 const Add = () => {
     return <AddDepartment></AddDepartment>
