@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import CompactTable from 'components/common/compact-table/CompactTable';
 import { DeleteComplaint, GetByIdComplaint, GetComplaint } from 'libs/endpoints/complaint';
+import { complaintStatus } from 'types/Complaint';
 
 
 
@@ -26,10 +27,9 @@ const page = () => {
       if (data) {
         setComplaints((prev) => ({
           headers: [
-            { title: 'ID', field: 'id' },
-            { title: 'Date', field: 'complaintDate' },
-            { title: 'Description', field: 'complaintDescription' },
-            { title: 'Category', field: 'complaintCategory' },
+            { title: 'Complaint Description', field: 'complaintDescription' },
+            { title: 'serviceProvider Name', field: 'serviceProvider.firstName' },
+            { title: 'Branch Name', field: 'branch.branchName' },
             { title: 'Status', field: 'complaintStatus' },
           ],
           data: data,
@@ -55,7 +55,7 @@ const page = () => {
 
   const handleOnEdit = async (id: string) => {
     await GetByIdComplaint(id)
-    router.push(`/admin/complaint/update/${id}`);
+    router.push(`/admin/complaint/${id}/status/${complaintStatus}`);
   };
   return (
     <Card
@@ -77,29 +77,7 @@ const page = () => {
         <Menu />
       </Flex>
       <Box>
-        <Link href="complaint/add">
-          <div style={{ textAlign: 'end', margin: '1px 20px' }}>
-            <button
-              type="button"
-              style={{
-                backgroundColor: 'blue' /* Green background */,
-                border: 'none',
-                color: 'white',
-                padding: '10px 20px' /* Some padding */,
-                textAlign: 'center',
-                textDecoration: 'none',
-                display: 'inline-block',
-                fontSize: '16px',
-                margin: '4px 2px',
-                cursor: 'pointer',
-                borderRadius: '5px' /* Rounded corners */,
-              }}
-            >
-              Add new Complaint{' '}
-              <span style={{ fontSize: '20px', fontWeight: 'bold' }}>+</span>
-            </button>
-          </div>
-        </Link>
+   
 
         {Complaints && (
           <CompactTable

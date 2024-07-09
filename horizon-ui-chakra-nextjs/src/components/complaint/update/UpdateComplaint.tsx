@@ -5,9 +5,10 @@ import CompactForm, {
   IFieldsProps,
 } from 'components/common/compact-form/CompactForm';
 import { useRouter } from 'next/navigation';
-import { IComplaintList, IComplaint } from 'types/Complaint';
+import { IComplaintList, IComplaint, complaintStatus } from 'types/Complaint';
 import { GetByIdComplaint, UpdateComplaint } from 'libs/endpoints/complaint';
 import { getCustomer } from 'libs/endpoints/customer';
+import { enumToArray } from 'utils/enumUtils';
 
 const ComplaintUpdateForm = ({ id }: { id: string }) => {
   const [Complaint, setComplaint] = useState<IComplaintList>();
@@ -29,7 +30,9 @@ const ComplaintUpdateForm = ({ id }: { id: string }) => {
     fetchComplaint();
 }, [])
 
-  const handleSubmit = async (formData: IComplaint) => {
+const complaintStatusOptions = enumToArray(complaintStatus);
+
+  const handleSubmit = async (formData:  complaintStatus) => {
     await UpdateComplaint(formData, id);
     router.push('/admin/complaint');
   };
@@ -38,14 +41,9 @@ const ComplaintUpdateForm = ({ id }: { id: string }) => {
     title: 'Complaint Details',
     disabled: false,
     fields: [
-      { label: 'Complaint Date', name: 'complaintDate', inputType: 'date', placeholder: 'Date' },
-      { label: 'Complaint Description', name: 'complaintDescription', inputType: 'text', placeholder: 'Complaint Description' },
-      { label: 'Complaint Category', name: 'complaintCategory', inputType: 'text', placeholder: 'Complaint Category' },
-      { label: 'Complaint Status', name: 'complaintStatus', inputType: 'text', placeholder: 'Complaint Status' },
+      { label: 'Complaint Status', name: 'complaintStatus', inputType: 'select',options:complaintStatusOptions, placeholder: 'Complaint Status' },
     ],
-    dropDownLists:[
-      {label: "Customer", name: "customerId", placeholder: "Customer", value: "id", displayName: "customerFirstName", data: Customer},
-     ],
+   
     heading: 'Update Complaint',
     data: Complaint,
     onSubmit: handleSubmit,

@@ -29,10 +29,11 @@ const ComplaintDetails = ({ id }: { id: string }) => {
     title: 'Complaint Details',
     disabled: true,
     fields: [
-      { label: 'Complaint Date', name: 'complaintDate', inputType: 'date', placeholder: 'Date' },
       { label: 'Complaint Description', name: 'complaintDescription', inputType: 'text', placeholder: 'Complaint Description' },
-      { label: 'Complaint Category', name: 'complaintCategory', inputType: 'text', placeholder: 'Complaint Category' },
       { label: 'Complaint Status', name: 'complaintStatus', inputType: 'text', placeholder: 'Complaint Status' },
+      {label:"Customer Name",name:"customerName",inputType:"text",placeholder:"Customer Name"},
+      {label:"Branch Name",name:"branch.branchName",inputType:"text",placeholder:"Branch Name"},
+      {label:"Service Provider Name",name:"serviceProvider.serviceProviderName",inputType:"text",placeholder:"ServiceProvider Name"}
     ],
     heading: 'Back to Complaints',
     data: complaint,
