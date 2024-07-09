@@ -8,7 +8,7 @@ import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import CompactTable from 'components/common/compact-table/CompactTable';
-import { DeleteRatingService, GetByIdRatingService, GetRatingService } from 'libs/endpoints/RatingService';
+import { DeleteRatingService, GetByIdRatingService, GetRatingService } from 'libs/endpoints/rating';
 
 
 
@@ -26,10 +26,11 @@ const page = () => {
       if (data) {
         setRatingServices((prev) => ({
           headers: [
-            { title: 'ID', field: 'id' },
             { title: 'Rating Value', field: 'ratingValue' },
-            { title: 'Service Name', field: 'serviceName' },
-            { title: 'Customer Name', field: 'customerName' },
+            {title: "Customer Name", field: "customerName"},
+            {title: "ProductName", field: "product.productName"},
+            {title: "ServiceName", field: "service.serviceName"}                             
+
           ],
           data: data,
         }));
@@ -46,16 +47,13 @@ const page = () => {
   const handleDelete = async (id: string) => {
     await DeleteRatingService(id);
     loadData();
-    router.push("/admin/ratingService");
+    router.push("/admin/rating");
   };
   const viewRatingServiceDetails = async (id: string) => {
-    router.push(`/admin/ratingService/${id}`);
+    router.push(`/admin/rating/${id}`);
   };
 
-  const handleOnEdit = async (id: string) => {
-    await GetByIdRatingService(id)
-    router.push(`/admin/ratingService/update/${id}`);
-  };
+ 
   return (
     <Card
       flexDirection="column"
@@ -76,37 +74,12 @@ const page = () => {
         <Menu />
       </Flex>
       <Box>
-        <Link href="ratingService/add">
-          <div style={{ textAlign: 'end', margin: '1px 20px' }}>
-            <button
-              type="button"
-              style={{
-                backgroundColor: 'blue' /* Green background */,
-                border: 'none',
-                color: 'white',
-                padding: '10px 20px' /* Some padding */,
-                textAlign: 'center',
-                textDecoration: 'none',
-                display: 'inline-block',
-                fontSize: '16px',
-                margin: '4px 2px',
-                cursor: 'pointer',
-                borderRadius: '5px' /* Rounded corners */,
-              }}
-            >
-              Add new RatingService{' '}
-              <span style={{ fontSize: '20px', fontWeight: 'bold' }}>+</span>
-            </button>
-          </div>
-        </Link>
-
-        {RatingServices && (
+              {RatingServices && (
           <CompactTable
             headers={RatingServices.headers}
             data={RatingServices.data}
             onDelete={handleDelete}
             onClick={viewRatingServiceDetails}
-            onUpdate={handleOnEdit}
           />
         )}
       </Box>
