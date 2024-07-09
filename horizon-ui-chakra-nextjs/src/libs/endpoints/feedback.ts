@@ -9,7 +9,7 @@ const Url = `${baseUrl}/Feedback`;
  */
 export async function getFeedback(): Promise<IFeedbackList[]> {
   const data = await fetchApi<any>(Url, "GET");
-  let Feedbacks = data.value;
+  let Feedbacks = data.value.data;
   return Feedbacks;
 }
 /**
@@ -30,23 +30,4 @@ export async function getByIdFeedback(id: string): Promise<IFeedbackList> {
   const data = await fetchApi<any>(`${Url}/${id}`, "GET");
   let Feedbacks = data.value;
   return Feedbacks;
-}
-/**
- * updates an existing Feedback's information.
- * @param BodyData - the updated Feedback data.
- * @param id - the id of the Feedback to be updated.
- * @returns a promise resolving to a success message upon successful update.
- */
-export async function updateFeedback(BodyData: IFeedback, id: string): Promise<string> {
-  const data = await fetchApi<any>(`${Url}/${id}`, "PUT", JSON.stringify(BodyData));
-  return data.successMessage;
-}
-/**
- * adds a new Feedback to the database.
- * @param BodyData - the Feedback data to be added.
- * @returns a promise resolving to a success message upon successful addition.
- */
-export async function addFeedback(BodyData: IFeedback): Promise<string> {
-  const data = await fetchApi<any>(Url, "POST", JSON.stringify(BodyData));
-  return data.successMessage;
 }
