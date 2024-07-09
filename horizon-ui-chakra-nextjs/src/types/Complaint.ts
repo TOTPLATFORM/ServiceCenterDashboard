@@ -1,15 +1,28 @@
 
 export interface IComplaint{
-    complaintDate: Date,
     complaintDescription: string,
-    complaintCategory: string,
-    complaintStatus: string,
-    customerId: string
+    complaintStatus: complaintStatus,
+    customerId: string,
+    branchId?:string,
+    serviceProviderId?:string
 }
 export interface IComplaintList{
     id: number
     complaintDate: Date,
     complaintDescription: string,
-    complaintCategory: string,
-    complaintStatus: string
+    complaintStatus: complaintStatus,
+    customerName:string,
+    branch?:{
+        branchName:string,
+    }
+    serviceprovider?:{
+        firstName:string,
+        lastName:string
+    }
+}
+export enum complaintStatus{
+    Pending,
+   Approved,
+   Cancelled,
+   Resolved
 }

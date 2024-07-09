@@ -31,9 +31,11 @@ const FeedbackDetails = ({ id }: { id: string }) => {
     title: 'Feedback Details',
     disabled: true,
     fields: [
-      {label: "Date", name: "feedbackDate", inputType: "date", placeholder: "Date"},
       {label: "Description", name: "feedbackDescription", inputType: "text", placeholder: "Description"},
-      {label: "Feedback Category", name: "feedbackCategory", inputType: "text", placeholder: "Category"}
+      {label:"Customer Name",name:"customerName",inputType:"text",placeholder:"Customer Name"},
+      {label:"Product Name",name:"product.productName",inputType:"text",placeholder:"Product Name"},
+      {label:"Service Name",name:"service.serviceName",inputType:"text",placeholder:"Service Name"}
+    
     ],
     heading: 'Back to Feedbacks',
     data: Feedback,

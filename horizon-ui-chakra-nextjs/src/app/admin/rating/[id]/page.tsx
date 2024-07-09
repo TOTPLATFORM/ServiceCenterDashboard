@@ -1,4 +1,4 @@
-import RatingServiceDetails from "components/ratingService/details/RatingServiceDetails";
+import RatingServiceDetails from "components/rating/details/RatingDetails";
 
 const Details = ({ params }: { params: { id: string } }) => {
   return <RatingServiceDetails id={params.id}></RatingServiceDetails>

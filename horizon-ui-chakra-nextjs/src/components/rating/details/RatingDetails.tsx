@@ -5,8 +5,8 @@ import CompactForm, {
   IFieldsProps,
 } from 'components/common/compact-form/CompactForm';
 import { useRouter } from 'next/navigation';
-import { IRatingServiceList } from 'types/RatingService';
-import { GetByIdRatingService } from 'libs/endpoints/RatingService';
+import { IRatingServiceList } from 'types/Rating';
+import { GetByIdRatingService } from 'libs/endpoints/rating';
 
 const RatingServiceDetails = ({ id }: { id: string }) => {
   const [ratingService, setRatingService] = useState<IRatingServiceList>();
@@ -22,18 +22,19 @@ const RatingServiceDetails = ({ id }: { id: string }) => {
 }, [])
 
   const handleSubmit = async (formData: IRatingServiceList) => {
-    router.push('/admin/ratingService');
+    router.push('/admin/rating');
   };
 
   let fields: IFieldsProps = {
-    title: 'RatingService Details',
+    title: 'Rating Details',
     disabled: true,
     fields: [
-      { label: 'Rating Value', name: 'ratingValue', inputType: 'number', placeholder: 'Rate' },
-      { label: 'Service', name: 'serviceId', placeholder: 'Service', inputType: 'text' },
-      { label: "Customer", name: "customerId", placeholder: "Customer", inputType:"text" },
+      { label: 'Rating Value', name: 'ratingValue', inputType: 'number', placeholder: 'Rate Value' },
+      {label:"Customer Name",name:"customerName",inputType:"text",placeholder:"Customer Name"},
+      {label:"Product Name",name:"product.productName",inputType:"text",placeholder:"Product Name"},
+      {label:"Service Name",name:"service.serviceName",inputType:"text",placeholder:"Service Name"}
     ],
-    heading: 'Back to Service Packages',
+    heading: 'Back to Rating',
     data: ratingService,
     onSubmit: handleSubmit,
   };

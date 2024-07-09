@@ -1,8 +1,8 @@
-import {IRatingService, IRatingServiceList}  from 'types/RatingService';
+import {IRatingService, IRatingServiceList}  from 'types/Rating';
 import fetchApi from 'utils/baseFetch';
 import {baseUrl}  from 'utils/header';
 
-const Url = `${baseUrl}/RatingService`;
+const Url = `${baseUrl}/Rating`;
 
 /**
  * Retrieves a list of ratingServices from the API.
@@ -10,30 +10,11 @@ const Url = `${baseUrl}/RatingService`;
  */
 export async function GetRatingService(): Promise<IRatingServiceList[]> {
   const data = await fetchApi<any>(Url, "GET");
-  let ratingServices = data.value;
+  let ratingServices = data.value.data;
   return ratingServices;
 }
 
-/**
- * Adds a new RatingService to the database.
- * @param BodyData - The RatingService data to be added.
- * @returns A promise resolving to a success message upon successful addition.
- */
-export async function AddRatingService(BodyData: IRatingService): Promise<string> {
-  const data = await fetchApi<any>(Url, "POST", JSON.stringify(BodyData));
-  return data.successMessage;
-}
 
-/**
- * Updates an existing RatingService's information.
- * @param BodyData - The updated RatingService data.
- * @param id - The ID of the RatingService to be updated.
- * @returns A promise resolving to a success message upon successful update.
- */
-export async function UpdateRatingService(BodyData: IRatingService, id: string): Promise<string> {
-  const data = await fetchApi<any>(`${Url}/${id}`, "PUT", JSON.stringify(BodyData));
-  return data.successMessage;
-}
 
 /**
  * Retrieves a RatingService's information by ID.

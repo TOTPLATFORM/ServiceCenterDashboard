@@ -1,14 +1,22 @@
 export interface IFeedbackList
 {  
 	id: number;
-    feedbackDate: Date,
     feedbackDescription: string,
-    feedbackCategory: string
+    customerName: string,
+    product?:{
+        productName:string
+    },
+    service?:{
+        serviceName:string
+    },
+    feedbackDate:Date
 }
 
 export interface IFeedback
 { 
-    feedbackDate: Date,
+    id: number;
     feedbackDescription: string,
-    feedbackCategory: string
+    customerId: string,
+    productId?:number,
+    serviceId?:number
 }

@@ -1,4 +1,4 @@
-import {IComplaint, IComplaintList}  from 'types/Complaint';
+import {complaintStatus, IComplaint, IComplaintList}  from 'types/Complaint';
 import fetchApi from 'utils/baseFetch';
 import {baseUrl}  from 'utils/header';
 
@@ -10,19 +10,11 @@ const Url = `${baseUrl}/Complaint`;
  */
 export async function GetComplaint(): Promise<IComplaintList[]> {
   const data = await fetchApi<any>(Url, "GET");
-  let complaints = data.value;
+  let complaints = data.value.data;
   return complaints;
 }
 
-/**
- * Adds a new Complaint to the database.
- * @param BodyData - The Complaint data to be added.
- * @returns A promise resolving to a success message upon successful addition.
- */
-export async function AddComplaint(BodyData: IComplaint): Promise<string> {
-  const data = await fetchApi<any>(Url, "POST", JSON.stringify(BodyData));
-  return data.successMessage;
-}
+
 
 /**
  * Updates an existing Complaint's information.
@@ -30,8 +22,8 @@ export async function AddComplaint(BodyData: IComplaint): Promise<string> {
  * @param id - The ID of the Complaint to be updated.
  * @returns A promise resolving to a success message upon successful update.
  */
-export async function UpdateComplaint(BodyData: IComplaint, id: string): Promise<string> {
-  const data = await fetchApi<any>(`${Url}/${id}`, "PUT", JSON.stringify(BodyData));
+export async function UpdateComplaint(status:complaintStatus, id: string): Promise<string> {
+  const data = await fetchApi<any>(`${Url}/${id}/status/${status}`, "PUT");
   return data.successMessage;
 }
 
