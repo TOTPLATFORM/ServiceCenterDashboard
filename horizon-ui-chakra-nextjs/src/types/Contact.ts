@@ -1,3 +1,7 @@
+import { City } from "./City";
+import { Country } from "./Country";
+import { Gender } from "./gender";
+
 export interface IContactList
 {  
 	id: string;
@@ -29,32 +33,5 @@ export interface Address
 	postalCode: string,
 }
 
-export enum Status
-{
-Lead , 
-Oppurtienty,
-Cancelled,
-Customer
-}
-export enum Gender {
-female , 
-male 
-}
-export enum City
-{
-    Cairo,
-    Giza,
-    Monufia,
-    Alexandria,
-    Sharqia,
-    Beheira
-}
 
-export enum Country
-{
-    Egypt,
-    Bahrain,
-    Canada,
-    China,
-    France
-}
+
