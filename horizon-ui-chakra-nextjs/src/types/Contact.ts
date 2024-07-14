@@ -1,3 +1,4 @@
+
 export interface IContactList
 {  
 	id: string;
@@ -27,6 +28,9 @@ export interface Address
     country: Country,
 	postalCode: string,
 }
+
+
+
 
 export enum Status
 {
