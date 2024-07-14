@@ -9,7 +9,7 @@ const Url = `${baseUrl}/Offer`;
  */
 export async function getOffer(): Promise<IOfferList[]> {
   const data = await fetchApi<any>(Url, "GET");
-  let Offers = data.value;
+  let Offers = data.value.data;
   return Offers;
 }
 /**

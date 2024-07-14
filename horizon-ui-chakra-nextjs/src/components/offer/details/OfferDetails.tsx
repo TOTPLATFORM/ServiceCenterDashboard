@@ -36,7 +36,8 @@ const OfferDetails = ({ id }: { id: string }) => {
       {label: "Start Date", name: "startDate", inputType: "date", placeholder: "Start Date"},
       {label: "End Date", name: "endDate", inputType: "date", placeholder: "End Date"},
       {label: "Discount", name: "discount", inputType: "number", placeholder: "Discount"},
-      {label: "Product", name: "productName", inputType: "text", placeholder: "Product"},
+      {label:"Product Name",name:"product.productName",inputType:"text",placeholder:"Product Name"},
+      {label:"Service Name",name:"service.serviceName",inputType:"text",placeholder:"Service Name"}
     ],
     heading: 'Back to Offers',
     data: Offer,

@@ -5,8 +5,7 @@ export interface IProductBrandList
     brandDescription: string,
     countryOfOrigin: string,
     foundedYear: Date,
-    CreatedDate: Date,
-    UpdatedDAte: Date
+   
 	
 }
 export interface IProductBrand

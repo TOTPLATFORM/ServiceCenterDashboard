@@ -1,19 +1,31 @@
 export interface IOfferList
 {  
 	id: number;
-    offerName: string,
+    offerName: offerName,
     offerDescription: string,
     startDate: Date,
     endDate: Date,
     discount: number,
-    productName: string
+    product?:{
+        productName:string
+    },
+    service?:{
+        serviceName:string
+    }
 }
 export interface IOffer
 { 
-    offerName: string,
+    offerName: offerName,
     offerDescription: string,
     startDate: Date,
     endDate: Date,
     discount: number,
-    productId: number
+    productId?:number,
+    serviceId?:number
+}
+export enum offerName{
+    BuyOneGetOne,
+    Sales50Percentange,
+    FreeDelivery,
+    Voucher
 }

@@ -37,12 +37,13 @@ const Page = () => {
         setOffers((prev) => ({
           headers: [
             {title: 'id', field: 'id' },
-            {title: "Offer Name", field: "offerName"},
-            {title: "Product", field: "productName"},   
+            {title: "Offer Name", field: "offerName"},  
             {title: "Description", field: "offerDescription"},
             {title: "Start Date", field: "startDate"},
             {title: "End Date", field: "endDate"},           
-            {title: "Discount", field: "discount"},           
+            {title: "Discount", field: "discount"},   
+            {title: "ProductName", field: "product.productName"},
+            {title: "ServiceName", field: "service.serviceName"}         
                     
           ],
           data: data,
