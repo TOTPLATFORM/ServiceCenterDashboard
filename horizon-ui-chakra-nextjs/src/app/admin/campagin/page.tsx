@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import CompactTable from 'components/common/compact-table/CompactTable';
 import { deleteCampagin, getByIdCampagin, getCampagin } from 'libs/endpoints/campagin';
+import { CampaginStatus } from "types/Campagin";
 
 const Page = () => {
   const [Campagins, setCampagins] = useState<{

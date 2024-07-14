@@ -7,7 +7,7 @@ export interface ICampaginList
     endDate: Date,
     budget: number,
     goals: string,
-    status: CampaginStatus
+    CampaginStatus: CampaginStatus
 }
 export interface ICampagin
 { 
