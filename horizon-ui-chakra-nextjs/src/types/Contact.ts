@@ -5,6 +5,7 @@ export interface IContactList
     lastName: string,
     email: string,
     gender: Gender,
+    WhatsAppNumber : string,
     city: City,
     country: Country,
 	postalCode: string,
@@ -16,9 +17,7 @@ export interface IContact
     lastName: string,
     dateOfBirth:Date,
     email: string,
-    phoneNumber : string,
-    userName:string,
-    password:string,
+    WhatsAppNumber : string,
     gender: Gender,
     address: Address
 }
@@ -53,8 +52,8 @@ export enum City
 export enum Country
 {
     Egypt,
-    Bahrain,
-    Canada,
-    China,
-    France
+    // Bahrain,
+    // Canada,
+    // China,
+    // France
 }

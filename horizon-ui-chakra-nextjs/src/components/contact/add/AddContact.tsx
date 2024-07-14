@@ -10,23 +10,21 @@ const AddContact = () => {
     const router = useRouter();
     const handleSubmit = async (formData: any) => {
 
-        let contact: IContact = {
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            gender: formData.gender,
-            email: formData.email,
-            address: {
-                city: formData.city,
-                country: formData.country,
-                postalCode: formData.postalCode
-            },
-            password : formData.password,
-            phoneNumber : formData.phoneNumber,
-            userName: formData.userName,
-            dateOfBirth : formData.dateOfBirth
-        }
+        // let contact: IContact = {
+        //     firstName: formData.firstName,
+        //     lastName: formData.lastName,
+        //     gender: formData.gender,
+        //     email: formData.email,
+        //     address: {
+        //         city: formData.city,
+        //         country: formData.country,
+        //         postalCode: formData.postalCode
+        //     },
+        //     WhatsAppNumber : formData.phoneNumber,
+        //     dateOfBirth : formData.dateOfBirth
+        // }
 
-        await addContact(contact);
+        await addContact(formData);
         router.push("/admin/contact");
     }
 
@@ -41,13 +39,11 @@ const AddContact = () => {
             {label: "First Name", name: "firstName", inputType: "text", placeholder: "First Name"},
             {label: "Last Name", name: "lastName", inputType: "text", placeholder: "Last Name"},
             {label: "Email Address", name: "email", inputType: "email", placeholder: "Email Address"},
-            {label: "Phone Number", name: "phoneNumber", inputType: "text", placeholder: "Phone Number"},
+            {label: "Phone Number", name: "WhatsAppNumber", inputType: "text", placeholder: "Phone Number"},
             {label: "DateOfBirth", name: "dateOfBirth", inputType: "date", placeholder: "DateOfBirth"},
-            {label: "Password", name: "password", inputType: "text", placeholder: "Password"},
-            {label: "UserName", name: "userName", inputType: "text", placeholder: "UserName"},
             {label: "Gender", name: "gender", inputType: "select", placeholder: "Select Gender" , options: genderOptions},
-            {label: "City", name: "city", inputType: "select",  placeholder: "Select City", options: cityOptions },
             {label: "country", name: "country", inputType: "select", placeholder: "Select Country" , options:countryOptions},
+            {label: "City", name: "city", inputType: "select",  placeholder: "Select City", options: cityOptions },
             {label: "Postal Code", name: "postalCode", inputType: "text", placeholder: "Postal Code"}
         ],
 
